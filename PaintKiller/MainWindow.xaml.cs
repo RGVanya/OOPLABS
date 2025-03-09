@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PaintKiller.ShapePlugins;
 
 namespace PaintKiller
 {
@@ -23,6 +24,10 @@ namespace PaintKiller
         public MainWindow()
         {
             InitializeComponent();
+            MyRectangle rect = new MyRectangle(myCanvas, 10, 10, 100, 200);
+            rect.Draw(myCanvas);
         }
+
     }
+
 }
