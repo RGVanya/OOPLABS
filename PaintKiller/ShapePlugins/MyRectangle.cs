@@ -41,12 +41,9 @@ namespace PaintKiller.ShapePlugins
                 Fill = this.brush
             };
 
-            // Добавляем прямоугольник на Canvas
             canvas.Children.Add(rect);
-
-            // Устанавливаем позицию прямоугольника на Canvas
-            Canvas.SetLeft(rect, 100); // Задаем X-координату
-            Canvas.SetTop(rect, 100);  // Задаем Y-координату
+            Canvas.SetLeft(rect, 1); 
+            Canvas.SetTop(rect, 0);  
         }
 
     }

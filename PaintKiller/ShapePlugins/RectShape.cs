@@ -46,6 +46,15 @@ namespace PaintKiller.ShapePlugins
             {
                 xStart = x1;
             }
+
+            if (y2 < y1)
+            {
+                yStart = y2;
+            }
+            else
+            {
+                yStart = y1;
+            }
             height = Math.Abs(y1 - y2);
             width = Math.Abs(x1 - x2);
         }

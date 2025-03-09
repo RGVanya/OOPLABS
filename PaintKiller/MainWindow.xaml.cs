@@ -26,6 +26,8 @@ namespace PaintKiller
             InitializeComponent();
             MyRectangle rect = new MyRectangle(myCanvas, 10, 10, 100, 200);
             rect.Draw(myCanvas);
+            MyLine line = new MyLine(myCanvas, 10, 10, 100, 200);
+            line.Draw(myCanvas);
         }
 
     }

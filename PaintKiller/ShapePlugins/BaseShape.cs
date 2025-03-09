@@ -16,7 +16,7 @@ namespace PaintKiller.ShapePlugins
 
         public BaseShape(Canvas canvas)
         {
-            this.pen = new Pen(Brushes.Black, 1.0);
+            this.pen = new Pen(Brushes.Black, 2.0);
             this.brush = Brushes.White;
             this.canvas = canvas;
         }
