@@ -6,7 +6,10 @@
         xmlns:local="clr-namespace:PaintKiller"
         mc:Ignorable="d"
         Title="PaintKiller" Height="450" Width="800">
-    <Canvas Name="myCanvas">
-        
-    </Canvas>
+    <Grid>
+        <Canvas Name="myCanvas" Background="White" MouseDown="MyCanvas_MouseDown" MouseMove="myCanvas_MouseMove" MouseUp="myCanvas_MouseUp">
+
+        </Canvas>
+    </Grid>
+    
 </Window>
