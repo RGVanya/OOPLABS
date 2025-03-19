@@ -58,6 +58,7 @@
     <Compile Include="ShapePlugins\BaseShape.cs" />
     <Compile Include="ShapePlugins\MyEllipse.cs" />
     <Compile Include="ShapePlugins\MyLine.cs" />
+    <Compile Include="ShapePlugins\MyPolyline.cs" />
     <Compile Include="ShapePlugins\MyRectangle.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

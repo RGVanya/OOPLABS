@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -32,7 +34,7 @@ namespace PaintKiller
         }
 
         //Работает только с прямоугольником, как тестовый вариант для проверки рисования
-        private void MyCanvas_MouseDown(object sender, MouseButtonEventArgs e)
+        private void MyCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             _StartPoint = e.GetPosition(myCanvas);
             _IsDrawing = true;
@@ -44,7 +46,10 @@ namespace PaintKiller
             //_currentShape = new MyLine(myCanvas, _StartPoint.X, _StartPoint.Y, _StartPoint.X, _StartPoint.Y);
 
             //Эллипс
-            _currentShape = new MyEllipse(myCanvas, _StartPoint.X, _StartPoint.Y);
+            //_currentShape = new MyEllipse(myCanvas, _StartPoint.X, _StartPoint.Y);
+
+            //ломанная
+            _currentShape = new MyPolyline(myCanvas, _StartPoint.X, _StartPoint.Y, _StartPoint.X, _StartPoint.Y);
 
             //работает вроде со всеми классами.
             _currentShape.Draw(myCanvas);
@@ -63,9 +68,26 @@ namespace PaintKiller
         }
 
         //Работает только с прямоугольником, как тестовый вариант для проверки рисования
-        private void myCanvas_MouseUp(object sender, MouseButtonEventArgs e)
+        private void myCanvas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             _IsDrawing = false;
+        }
+
+        private void myCanvas_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+            //Для полигона и ломанной
+            Type type = _currentShape.GetType();
+            MethodInfo method = type.GetMethod("AddNewPoint");
+            if (method != null)
+            {
+                Point currentPoint = e.GetPosition(myCanvas);
+                method.Invoke(_currentShape, new object[] {currentPoint});
+            }
+            else
+            {
+                return;
+            }
         }
     }
 

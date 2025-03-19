@@ -10,7 +10,7 @@ using System.Windows.Shapes;
 
 namespace PaintKiller.ShapePlugins
 {
-    internal class MyEllipse : BaseShape
+    public class MyEllipse : BaseShape
     {
 
         System.Windows.Shapes.Ellipse ellipse = new System.Windows.Shapes.Ellipse();

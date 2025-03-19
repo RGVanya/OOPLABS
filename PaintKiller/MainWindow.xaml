@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="PaintKiller" Height="450" Width="800">
     <Grid>
-        <Canvas Name="myCanvas" Background="White" MouseDown="MyCanvas_MouseDown" MouseMove="myCanvas_MouseMove" MouseUp="myCanvas_MouseUp">
+        <Canvas Name="myCanvas" Background="White" MouseRightButtonDown="myCanvas_MouseRightButtonDown"  MouseLeftButtonDown="MyCanvas_MouseLeftButtonDown" MouseMove="myCanvas_MouseMove" MouseUp="myCanvas_MouseLeftButtonUp">
 
         </Canvas>
     </Grid>
