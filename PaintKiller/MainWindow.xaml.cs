@@ -42,8 +42,10 @@ namespace PaintKiller
 
             //линия
             //_currentShape = new MyLine(myCanvas, _StartPoint.X, _StartPoint.Y, _StartPoint.X, _StartPoint.Y);
-            
-            
+
+            //Эллипс
+            _currentShape = new MyEllipse(myCanvas, _StartPoint.X, _StartPoint.Y);
+
             //работает вроде со всеми классами.
             _currentShape.Draw(myCanvas);
 

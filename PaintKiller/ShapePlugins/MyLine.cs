@@ -36,10 +36,7 @@ namespace PaintKiller.ShapePlugins
 
         public override void Draw(Canvas canvas)
         {
-
             canvas.Children.Add(line);
-            //Canvas.SetLeft(line, xStart);
-            //Canvas.SetTop(line, yStart);
         }
 
         public override void UpdateShape(Canvas canvas, double new_x, double new_y)
@@ -48,29 +45,6 @@ namespace PaintKiller.ShapePlugins
             line.Y2 = new_y;
             xStart = new_x;
             yStart = new_y;
-        }
-
-
-        private void PositionSet(double x1, double x2, double y1, double y2)
-        {
-
-            if (x2 < x1)
-            {
-                xStart = x2;
-            }
-            else
-            {
-                xStart = x1;
-            }
-
-            if (y2 < y1)
-            {
-                yStart = y2;
-            }
-            else
-            {
-                yStart = y1;
-            }
         }
     }
 }
