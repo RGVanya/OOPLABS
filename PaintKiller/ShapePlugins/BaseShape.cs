@@ -10,39 +10,29 @@ namespace PaintKiller.ShapePlugins
 {
     public abstract class BaseShape
     {
-        protected Brush brush;
-        protected Pen pen;
+        protected Brush brush = Brushes.Transparent;
+        protected Pen pen = new Pen(Brushes.Black, 2.0);
         protected Canvas canvas;
 
-        public BaseShape(Canvas canvas)
-        {
-            this.pen = new Pen(Brushes.Black, 2.0);
-            this.brush = Brushes.White;
-            this.canvas = canvas;
-        }
-        public BaseShape(Canvas canvas, Pen pen_value)
-        {
-            this.pen = pen_value;
-            this.brush = Brushes.Transparent;
-            this.canvas = canvas;
-        }
 
-        public BaseShape(Canvas canvas, Brush brush_value)
+
+        public BaseShape(Canvas canvas, Pen pen_value = null, Brush brush_value = null)
         {
-            this.pen = new Pen(Brushes.Black, 1.0);
-            this.brush = brush_value;
             this.canvas = canvas;
-        }
-        public BaseShape(Canvas canvas, Pen pen_value, Brush brush_value)
-        {
-            this.pen = pen_value;
-            this.brush = brush_value;
-            this.canvas = canvas;
+
+            if (pen_value != null) 
+            {
+                this.pen = pen_value;
+            }
+            if (brush_value != null)
+            {
+                this.brush = brush_value;
+            }
         }
 
 
         public abstract void Draw(Canvas canvas);
-
+        public abstract void UpdateShape(Canvas canvas, double new_x, double new_y);
 
     }
 }

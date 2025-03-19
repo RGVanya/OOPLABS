@@ -23,15 +23,12 @@ namespace PaintKiller
     {
         private bool _IsDrawing = false;
         private Point _StartPoint;
-        private Rectangle _currentRectangle;
+        private MyRectangle _currentRectangle;
+        private BaseShape _currentShape;
 
         public MainWindow()
         {
             InitializeComponent();
-            //MyRectangle rect = new MyRectangle(myCanvas, 10, 10, 100, 200);
-            //rect.Draw(myCanvas);
-            //MyLine line = new MyLine(myCanvas, 10, 10, 100, 200);
-            //line.Draw(myCanvas);
         }
 
         //Работает только с прямоугольником, как тестовый вариант для проверки рисования
@@ -40,18 +37,16 @@ namespace PaintKiller
             _StartPoint = e.GetPosition(myCanvas);
             _IsDrawing = true;
 
+            //прямоугольник
+            //_currentShape = new MyRectangle(myCanvas, _StartPoint.X, _StartPoint.Y, _StartPoint.X , _StartPoint.Y);
 
-            _currentRectangle = new Rectangle
-            {
-                Stroke = Brushes.Black,
-                StrokeThickness = 2,
-                Fill = Brushes.Transparent
-            };
+            //линия
+            //_currentShape = new MyLine(myCanvas, _StartPoint.X, _StartPoint.Y, _StartPoint.X, _StartPoint.Y);
+            
+            
+            //работает вроде со всеми классами.
+            _currentShape.Draw(myCanvas);
 
-
-            Canvas.SetLeft(_currentRectangle, _StartPoint.X);
-            Canvas.SetTop(_currentRectangle, _StartPoint.Y);
-            myCanvas.Children.Add(_currentRectangle);
         }
 
         //Работает только с прямоугольником, как тестовый вариант для проверки рисования
@@ -61,19 +56,8 @@ namespace PaintKiller
 
             // Текущая позиция мыши
             Point currentPoint = e.GetPosition(myCanvas);
+            _currentShape.UpdateShape(myCanvas, currentPoint.X, currentPoint.Y);
 
-            // Вычисляем новые размеры
-            double width = Math.Abs(currentPoint.X - _StartPoint.X);
-            double height = Math.Abs(currentPoint.Y - _StartPoint.Y);
-
-            _currentRectangle.Width = width;
-            _currentRectangle.Height = height;
-
-            // Корректируем позицию, если мышь идёт влево/вверх
-            if (currentPoint.X < _StartPoint.X)
-                Canvas.SetLeft(_currentRectangle, currentPoint.X);
-            if (currentPoint.Y < _StartPoint.Y)
-                Canvas.SetTop(_currentRectangle, currentPoint.Y);
         }
 
         //Работает только с прямоугольником, как тестовый вариант для проверки рисования
