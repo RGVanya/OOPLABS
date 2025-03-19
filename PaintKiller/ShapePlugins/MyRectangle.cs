@@ -35,9 +35,6 @@ namespace PaintKiller.ShapePlugins
 
 
         public override void Draw(Canvas canvas) {
-            // Создаем прямоугольник
- 
-
             canvas.Children.Add(rect);
             Canvas.SetLeft(rect, xStart); 
             Canvas.SetTop(rect, yStart);  
@@ -45,8 +42,6 @@ namespace PaintKiller.ShapePlugins
 
         public override void UpdateShape(Canvas canvas, double new_x, double new_y)
         {
-            // Вычисляем новые размеры
-            //PositionSet(xStart, new_x, yStart, new_y);
             width = Math.Abs(new_x - xStart);
             height = Math.Abs(new_y - yStart);
 

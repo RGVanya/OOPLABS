@@ -18,9 +18,6 @@ using PaintKiller.ShapePlugins;
 
 namespace PaintKiller
 {
-    /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         private bool _IsDrawing = false;
@@ -49,7 +46,10 @@ namespace PaintKiller
             //_currentShape = new MyEllipse(myCanvas, _StartPoint.X, _StartPoint.Y);
 
             //ломанная
-            _currentShape = new MyPolyline(myCanvas, _StartPoint.X, _StartPoint.Y, _StartPoint.X, _StartPoint.Y);
+            //_currentShape = new MyPolyline(myCanvas, _StartPoint.X, _StartPoint.Y, _StartPoint.X, _StartPoint.Y);
+
+            //полигон
+            //_currentShape = new MyPolygon(myCanvas, _StartPoint.X, _StartPoint.Y, _StartPoint.X, _StartPoint.Y);
 
             //работает вроде со всеми классами.
             _currentShape.Draw(myCanvas);
@@ -75,14 +75,12 @@ namespace PaintKiller
 
         private void myCanvas_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-
-            //Для полигона и ломанной
             Type type = _currentShape.GetType();
             MethodInfo method = type.GetMethod("AddNewPoint");
             if (method != null)
             {
                 Point currentPoint = e.GetPosition(myCanvas);
-                method.Invoke(_currentShape, new object[] {currentPoint});
+                method.Invoke(_currentShape, new object[] { currentPoint });
             }
             else
             {
