@@ -8,13 +8,67 @@
         Title="PaintKiller" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="100"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <ToolBar Grid.Row="0" Background="LightYellow">
-            <Button Content="Прямоугольник"/>
-            <Button Content="Линия" />
-            <Button Content="Эллипс" />
+        <ToolBar Grid.Row="0" Background="DarkGray">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="250" />
+
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Horizontal" x:Name="ColorButtonsPanel" Grid.Column="0">
+                    <Grid x:Name="GridColorButtons">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50"></ColumnDefinition>
+                            <ColumnDefinition Width="50"></ColumnDefinition>
+                            <ColumnDefinition Width="50"></ColumnDefinition>
+                            <ColumnDefinition Width="50"></ColumnDefinition>
+                            <ColumnDefinition Width="50"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.Resources> 
+                            <Style x:Key="ColorButtonStyle" TargetType="ToggleButton">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ToggleButton">
+                                            <Border x:Name="border"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="Transparent"
+                                BorderThickness="3"
+                                CornerRadius="4" />
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsChecked" Value="True">
+                                                    <Setter TargetName="border" Property="BorderBrush" Value="Black"/>
+                                                </Trigger>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="border" Property="BorderBrush" Value="Blue"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Grid.Resources>
+                        <ToggleButton Style="{StaticResource ColorButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40" Grid.Column="0" Grid.Row="0" Background="White" Click="ColorToggleButton_Click"></ToggleButton>
+                        <ToggleButton Style="{StaticResource ColorButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40" Grid.Column="1" Grid.Row="0" Background="Gray" Click="ColorToggleButton_Click"></ToggleButton>
+                        <ToggleButton Style="{StaticResource ColorButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40" Grid.Column="2" Grid.Row="0" Background="Aqua" Click="ColorToggleButton_Click"></ToggleButton>
+                        <ToggleButton Style="{StaticResource ColorButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40" Grid.Column="3" Grid.Row="0" Background="Blue" Click="ColorToggleButton_Click"></ToggleButton>
+                        <ToggleButton Style="{StaticResource ColorButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40" Grid.Column="4" Grid.Row="0" Background="Purple" Click="ColorToggleButton_Click"></ToggleButton>
+
+                        <ToggleButton Style="{StaticResource ColorButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40" Grid.Column="0" Grid.Row="1" Background="Black" Click="ColorToggleButton_Click"></ToggleButton>
+                        <ToggleButton Style="{StaticResource ColorButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40" Grid.Column="1" Grid.Row="1" Background="Red" Click="ColorToggleButton_Click"></ToggleButton>
+                        <ToggleButton Style="{StaticResource ColorButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40" Grid.Column="2" Grid.Row="1" Background="Pink" Click="ColorToggleButton_Click"></ToggleButton>
+                        <ToggleButton Style="{StaticResource ColorButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40" Grid.Column="3" Grid.Row="1" Background="Orange" Click="ColorToggleButton_Click"></ToggleButton>
+                        <ToggleButton Style="{StaticResource ColorButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40" Grid.Column="4" Grid.Row="1" Background="Yellow" Click="ColorToggleButton_Click"></ToggleButton>
+                    </Grid>
+
+                    
+                </StackPanel>
+            </Grid>
             <ComboBox Name="ShapesCBox" Width="150" ></ComboBox>
         </ToolBar>
         <Canvas Name="myCanvas" Grid.Row="1" Background="White" MouseRightButtonDown="myCanvas_MouseRightButtonDown"  MouseLeftButtonDown="MyCanvas_MouseLeftButtonDown" MouseMove="myCanvas_MouseMove" MouseUp="myCanvas_MouseLeftButtonUp">

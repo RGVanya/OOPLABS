@@ -8,7 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using PaintKiller.ShapePlugins;
 
-namespace PaintKiller.Painting
+namespace PaintKiller.PaintingModule
 {
     internal class Painter
     {
@@ -27,6 +27,7 @@ namespace PaintKiller.Painting
 
         public static void ShapeUpdater(Canvas canvas, BaseShape shapeToUpdate, Point newPoint)
         {
+
             shapeToUpdate.UpdateShape(canvas, newPoint.X, newPoint.Y);
         }
 

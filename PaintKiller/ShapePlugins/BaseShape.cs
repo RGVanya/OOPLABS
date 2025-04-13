@@ -13,7 +13,7 @@ namespace PaintKiller.ShapePlugins
         protected Brush brush = Brushes.Transparent;
         protected Pen pen = new Pen(Brushes.Black, 2.0);
         protected Canvas canvas;
-
+       
 
 
         public BaseShape(Canvas canvas, Pen pen_value = null, Brush brush_value = null)
