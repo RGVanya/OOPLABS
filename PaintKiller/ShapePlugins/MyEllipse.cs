@@ -14,10 +14,10 @@ namespace PaintKiller.ShapePlugins
     {
 
         System.Windows.Shapes.Ellipse ellipse = new System.Windows.Shapes.Ellipse();
-        protected double xStart;
-        protected double yStart;
-        protected double width;
-        protected double height;
+        private double xStart;
+        private double yStart;
+        private double width;
+        private double height;
         public MyEllipse(Canvas canvas, double x1, double y1, Pen pen = null, Brush brush = null) : base(canvas, pen, brush) 
         {
             ellipse.Stroke = this.pen.Brush;
@@ -26,7 +26,6 @@ namespace PaintKiller.ShapePlugins
             yStart = y1;    
             width = 0;
             height = 0;
-
         }
 
 

@@ -14,7 +14,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PaintKiller.Painting;
 using PaintKiller.ShapePlugins;
+
 
 namespace PaintKiller
 {
@@ -22,52 +24,64 @@ namespace PaintKiller
     {
         private bool _IsDrawing = false;
         private Point _StartPoint;
-        private MyRectangle _currentRectangle;
+        //private MyRectangle _currentRectangle;
         private BaseShape _currentShape;
+
+
+
+
+        private static readonly string[] ShapeNames = new string[] {"Прямоугольник", "Линия", "Ломанная", "Полигон", "Эллипс" };
 
         public MainWindow()
         {
+
             InitializeComponent();
+            settingsIntialize();
+            Painter painter = new Painter();
         }
 
-        //Работает только с прямоугольником, как тестовый вариант для проверки рисования
+
         private void MyCanvas_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+
             _StartPoint = e.GetPosition(myCanvas);
             _IsDrawing = true;
 
+
             //прямоугольник
-            //_currentShape = new MyRectangle(myCanvas, _StartPoint.X, _StartPoint.Y, _StartPoint.X , _StartPoint.Y);
+            _currentShape = new MyRectangle(myCanvas, _StartPoint.X, _StartPoint.Y, _StartPoint.X , _StartPoint.Y);
+
 
             //линия
             //_currentShape = new MyLine(myCanvas, _StartPoint.X, _StartPoint.Y, _StartPoint.X, _StartPoint.Y);
 
+
             //Эллипс
             //_currentShape = new MyEllipse(myCanvas, _StartPoint.X, _StartPoint.Y);
+
 
             //ломанная
             //_currentShape = new MyPolyline(myCanvas, _StartPoint.X, _StartPoint.Y, _StartPoint.X, _StartPoint.Y);
 
+
             //полигон
-            //_currentShape = new MyPolygon(myCanvas, _StartPoint.X, _StartPoint.Y, _StartPoint.X, _StartPoint.Y);
+            _currentShape = new MyPolygon(myCanvas, _StartPoint.X, _StartPoint.Y, _StartPoint.X, _StartPoint.Y);
+
 
             //работает вроде со всеми классами.
-            _currentShape.Draw(myCanvas);
+            Painter.PaintCanvas(myCanvas, _currentShape);
 
         }
 
-        //Работает только с прямоугольником, как тестовый вариант для проверки рисования
+
         private void myCanvas_MouseMove(object sender, MouseEventArgs e)
         {
             if (!_IsDrawing) return;
-
-            // Текущая позиция мыши
             Point currentPoint = e.GetPosition(myCanvas);
-            _currentShape.UpdateShape(myCanvas, currentPoint.X, currentPoint.Y);
-
+            Painter.ShapeUpdater(myCanvas, _currentShape, currentPoint);
         }
 
-        //Работает только с прямоугольником, как тестовый вариант для проверки рисования
+
         private void myCanvas_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             _IsDrawing = false;
@@ -75,18 +89,18 @@ namespace PaintKiller
 
         private void myCanvas_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Type type = _currentShape.GetType();
-            MethodInfo method = type.GetMethod("AddNewPoint");
-            if (method != null)
+            Point currentPoint = e.GetPosition(myCanvas);
+            Painter.AddPoint(myCanvas, _currentShape, currentPoint);
+        }
+
+        private void settingsIntialize()
+        {
+            for (int i = 0; i < ShapeNames.Length; i++)
             {
-                Point currentPoint = e.GetPosition(myCanvas);
-                method.Invoke(_currentShape, new object[] { currentPoint });
-            }
-            else
-            {
-                return;
+                ShapesCBox.Items.Add(ShapeNames[i]);
             }
         }
+
     }
 
 }

@@ -7,9 +7,18 @@
         mc:Ignorable="d"
         Title="PaintKiller" Height="450" Width="800">
     <Grid>
-        <Canvas Name="myCanvas" Background="White" MouseRightButtonDown="myCanvas_MouseRightButtonDown"  MouseLeftButtonDown="MyCanvas_MouseLeftButtonDown" MouseMove="myCanvas_MouseMove" MouseUp="myCanvas_MouseLeftButtonUp">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <ToolBar Grid.Row="0" Background="LightYellow">
+            <Button Content="Прямоугольник"/>
+            <Button Content="Линия" />
+            <Button Content="Эллипс" />
+            <ComboBox Name="ShapesCBox" Width="150" ></ComboBox>
+        </ToolBar>
+        <Canvas Name="myCanvas" Grid.Row="1" Background="White" MouseRightButtonDown="myCanvas_MouseRightButtonDown"  MouseLeftButtonDown="MyCanvas_MouseLeftButtonDown" MouseMove="myCanvas_MouseMove" MouseUp="myCanvas_MouseLeftButtonUp">
 
         </Canvas>
     </Grid>
-    
 </Window>

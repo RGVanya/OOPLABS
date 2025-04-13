@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Painting\Painter.cs" />
     <Compile Include="ShapePlugins\BaseShape.cs" />
     <Compile Include="ShapePlugins\MyEllipse.cs" />
     <Compile Include="ShapePlugins\MyLine.cs" />

@@ -32,7 +32,10 @@ namespace PaintKiller.ShapePlugins
 
 
         public abstract void Draw(Canvas canvas);
-        public abstract void UpdateShape(Canvas canvas, double new_x, double new_y);
+        public virtual void UpdateShape(Canvas canvas, double new_x, double new_y)
+        {
+
+        }
 
     }
 }

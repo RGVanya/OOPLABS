@@ -49,7 +49,6 @@ namespace PaintKiller.ShapePlugins
             rect.Width = width;
             rect.Height = height;      
 
-            // Корректируем позицию, если мышь идёт влево/вверх
             if (xStart > new_x)
                 Canvas.SetLeft(rect, new_x);
             if (yStart > new_y)
