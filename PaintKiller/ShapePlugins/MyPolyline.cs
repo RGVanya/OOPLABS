@@ -7,14 +7,16 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using PaintKiller.AttributeModule;
 
 namespace PaintKiller.ShapePlugins
 {
+    [ShapeName("Ломанная")]
     public class MyPolyline : MyLine
     {
         private Polyline polyline = new Polyline();
 
-        public MyPolyline(Canvas canvas, double x1, double y1, double x2, double y2, Pen pen = null, Brush brush = null) : base(canvas, x1, x2, y1, y2, pen, brush)
+        public MyPolyline(Canvas canvas, double x1, double y1, Pen pen = null, Brush brush = null) : base(canvas, x1, y1, pen, brush)
         {
             xStart = x1;
             yStart = y1;

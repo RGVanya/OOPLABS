@@ -8,17 +8,18 @@
         Title="PaintKiller" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="120"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <ToolBar Grid.Row="0" Background="DarkGray">
+        <ToolBar Grid.Row="0" Background="DarkGray" BorderThickness="2" BorderBrush="Black">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="250" />
-
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <StackPanel Orientation="Horizontal" x:Name="ColorButtonsPanel" Grid.Column="0">
-                    <Grid x:Name="GridColorButtons">
+                <StackPanel Orientation="Horizontal" x:Name="FillColorButtonsPanel" Grid.Column="0">
+                    <Grid x:Name="FillGridColorButtons">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="50"></ColumnDefinition>
                             <ColumnDefinition Width="50"></ColumnDefinition>
@@ -27,19 +28,20 @@
                             <ColumnDefinition Width="50"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"></RowDefinition>
                             <RowDefinition></RowDefinition>
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
-                        <Grid.Resources> 
+                        <Grid.Resources>
                             <Style x:Key="ColorButtonStyle" TargetType="ToggleButton">
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="ToggleButton">
                                             <Border x:Name="border"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="Transparent"
-                                BorderThickness="3"
-                                CornerRadius="4" />
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="Transparent"
+                                    BorderThickness="3"
+                                    CornerRadius="15" />
                                             <ControlTemplate.Triggers>
                                                 <Trigger Property="IsChecked" Value="True">
                                                     <Setter TargetName="border" Property="BorderBrush" Value="Black"/>
@@ -53,23 +55,67 @@
                                 </Setter>
                             </Style>
                         </Grid.Resources>
-                        <ToggleButton Style="{StaticResource ColorButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40" Grid.Column="0" Grid.Row="0" Background="White" Click="ColorToggleButton_Click"></ToggleButton>
-                        <ToggleButton Style="{StaticResource ColorButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40" Grid.Column="1" Grid.Row="0" Background="Gray" Click="ColorToggleButton_Click"></ToggleButton>
-                        <ToggleButton Style="{StaticResource ColorButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40" Grid.Column="2" Grid.Row="0" Background="Aqua" Click="ColorToggleButton_Click"></ToggleButton>
-                        <ToggleButton Style="{StaticResource ColorButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40" Grid.Column="3" Grid.Row="0" Background="Blue" Click="ColorToggleButton_Click"></ToggleButton>
-                        <ToggleButton Style="{StaticResource ColorButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40" Grid.Column="4" Grid.Row="0" Background="Purple" Click="ColorToggleButton_Click"></ToggleButton>
+                        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+                            <RadioButton Content="Заливка" GroupName="Mode" IsChecked="True" Checked="Mode_Checked" Tag="Fill" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
+                            <RadioButton Content="Контур" GroupName="Mode" Checked="Mode_Checked" Tag="Stroke" Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2"/>
+                        </StackPanel>
+                        
+                        <ToggleButton Style="{StaticResource ColorButtonStyle}" x:Name="WhiteTBtn" HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40" Grid.Column="0" Grid.Row="1" Background="White" Tag="White" Click="ColorToggleButton_Click"></ToggleButton>
+                        <ToggleButton Style="{StaticResource ColorButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40" Grid.Column="1" Grid.Row="1" Background="Gray" Tag="Gray" Click="ColorToggleButton_Click"></ToggleButton>
+                        <ToggleButton Style="{StaticResource ColorButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40" Grid.Column="2" Grid.Row="1" Background="Aqua" Tag="Aqua" Click="ColorToggleButton_Click"></ToggleButton>
+                        <ToggleButton Style="{StaticResource ColorButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40" Grid.Column="3" Grid.Row="1" Background="Blue" Tag="Blue" Click="ColorToggleButton_Click"></ToggleButton>
+                        <ToggleButton Style="{StaticResource ColorButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40" Grid.Column="4" Grid.Row="1" Background="Purple" Tag="Purple" Click="ColorToggleButton_Click"></ToggleButton>
 
-                        <ToggleButton Style="{StaticResource ColorButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40" Grid.Column="0" Grid.Row="1" Background="Black" Click="ColorToggleButton_Click"></ToggleButton>
-                        <ToggleButton Style="{StaticResource ColorButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40" Grid.Column="1" Grid.Row="1" Background="Red" Click="ColorToggleButton_Click"></ToggleButton>
-                        <ToggleButton Style="{StaticResource ColorButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40" Grid.Column="2" Grid.Row="1" Background="Pink" Click="ColorToggleButton_Click"></ToggleButton>
-                        <ToggleButton Style="{StaticResource ColorButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40" Grid.Column="3" Grid.Row="1" Background="Orange" Click="ColorToggleButton_Click"></ToggleButton>
-                        <ToggleButton Style="{StaticResource ColorButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40" Grid.Column="4" Grid.Row="1" Background="Yellow" Click="ColorToggleButton_Click"></ToggleButton>
+                        <ToggleButton Style="{StaticResource ColorButtonStyle}" x:Name="BlackTBtn" HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40" Grid.Column="0" Grid.Row="2" Background="Black" Tag="Black" Click="ColorToggleButton_Click"></ToggleButton>
+                        <ToggleButton Style="{StaticResource ColorButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40" Grid.Column="1" Grid.Row="2" Background="Red" Tag="Red" Click="ColorToggleButton_Click"></ToggleButton>
+                        <ToggleButton Style="{StaticResource ColorButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40" Grid.Column="2" Grid.Row="2" Background="Pink" Tag="Pink" Click="ColorToggleButton_Click"></ToggleButton>
+                        <ToggleButton Style="{StaticResource ColorButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40" Grid.Column="3" Grid.Row="2" Background="Orange" Tag="Orange" Click="ColorToggleButton_Click"></ToggleButton>
+                        <ToggleButton Style="{StaticResource ColorButtonStyle}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40" Grid.Column="4" Grid.Row="2" Background="Yellow" Tag="Yellow" Click="ColorToggleButton_Click"></ToggleButton>
                     </Grid>
 
-                    
+
+                </StackPanel>
+                <StackPanel Orientation="Vertical" x:Name="ShapesPanel" Grid.Column="1">
+                    <Border BorderBrush="Black" BorderThickness="1" CornerRadius="5">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="60"></RowDefinition>
+                                <RowDefinition Height="45"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <ComboBox Grid.Row="0" Name="ShapesCBox" Width="150" HorizontalAlignment="Center" VerticalAlignment="Center" SelectedIndex="0" SelectionChanged="ShapesCBox_SelectionChanged"></ComboBox>
+                            <Label Grid.Row="1" Content="Выбор фигуры" HorizontalAlignment="Center" VerticalAlignment="Bottom"></Label>
+                        </Grid>
+                    </Border>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" x:Name="ToolsButtonsPanel" Grid.Column="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50"></ColumnDefinition>
+                            <ColumnDefinition Width="50"></ColumnDefinition>
+                            <ColumnDefinition Width="50"></ColumnDefinition>
+                            <ColumnDefinition Width="50"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <ToggleButton HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40" Grid.Column="0" Grid.Row="0" Background="White" Click="ColorToggleButton_Click">
+                            <Image Source="Resourses/rect.png"></Image>
+                        </ToggleButton>
+                        <ToggleButton HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40" Grid.Column="0" Grid.Row="0" Background="White" Click="ColorToggleButton_Click">
+                            <Image Source="Resourses/rect.png"></Image>
+                        </ToggleButton>
+                        <ToggleButton HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40" Grid.Column="0" Grid.Row="0" Background="White" Click="ColorToggleButton_Click">
+                            <Image Source="Resourses/rect.png"></Image>
+                        </ToggleButton>
+                        <ToggleButton HorizontalAlignment="Center" VerticalAlignment="Center" Width="40" Height="40" Grid.Column="0" Grid.Row="0" Background="White" Click="ColorToggleButton_Click">
+                            <Image Source="Resourses/rect.ico"></Image>
+                        </ToggleButton>
+
+                    </Grid>
                 </StackPanel>
             </Grid>
-            <ComboBox Name="ShapesCBox" Width="150" ></ComboBox>
+            
         </ToolBar>
         <Canvas Name="myCanvas" Grid.Row="1" Background="White" MouseRightButtonDown="myCanvas_MouseRightButtonDown"  MouseLeftButtonDown="MyCanvas_MouseLeftButtonDown" MouseMove="myCanvas_MouseMove" MouseUp="myCanvas_MouseLeftButtonUp">
 

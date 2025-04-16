@@ -8,9 +8,11 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Media3D;
 using System.Windows.Shapes;
+using PaintKiller.AttributeModule;
 
 namespace PaintKiller.ShapePlugins
 {
+    [ShapeName("Прямоугольник")]
     public class MyRectangle : BaseShape
     {
 
@@ -22,9 +24,9 @@ namespace PaintKiller.ShapePlugins
         System.Windows.Shapes.Rectangle rect = new System.Windows.Shapes.Rectangle();
 
 
-        public MyRectangle(Canvas canvas, double x1, double y1, double x2, double y2, Pen pen = null, Brush brush = null) : base(canvas, pen, brush)
+        public MyRectangle(Canvas canvas, double x1, double y1, Pen pen = null, Brush brush = null) : base(canvas, pen, brush)
         {
-            PositionSet(x1, x2, y1, y2);
+            PositionSet(x1, x1, y1, y1);
             rect.Width = this.width;
             rect.Height = this.height;
             rect.Stroke = this.pen.Brush;

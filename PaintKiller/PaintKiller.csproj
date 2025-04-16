@@ -55,15 +55,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AttributeModule\ShapeNameAttribute.cs" />
     <Compile Include="FileModule\FileManager.cs" />
     <Compile Include="PaintingModule\Painter.cs" />
+    <Compile Include="ShapeLoadModule\ShapeLoader.cs" />
     <Compile Include="ShapePlugins\BaseShape.cs" />
     <Compile Include="ShapePlugins\MyEllipse.cs" />
     <Compile Include="ShapePlugins\MyLine.cs" />
     <Compile Include="ShapePlugins\MyPolygon.cs" />
     <Compile Include="ShapePlugins\MyPolyline.cs" />
     <Compile Include="ShapePlugins\MyRectangle.cs" />
-    <Compile Include="UndoRedo\UndoRedo.cs" />
+    <Compile Include="UndoRedoModule\UndoRedo.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -103,6 +105,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resourses\rect.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

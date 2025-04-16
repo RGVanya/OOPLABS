@@ -15,8 +15,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PaintKiller.AttributeModule;
 using PaintKiller.PaintingModule;
+using PaintKiller.ShapeLoadModule;
 using PaintKiller.ShapePlugins;
+using PaintKiller.UndoRedoModule;
 
 
 namespace PaintKiller
@@ -25,13 +28,22 @@ namespace PaintKiller
     {
         private bool _IsDrawing = false;
         private Point _StartPoint;
-        //private MyRectangle _currentRectangle;
         private BaseShape _currentShape;
+        private ToggleButton selectedFillButton;
+        private ToggleButton selectedStrokeButton;
+        public Dictionary<string, Type> shapeTypes;
 
+        private enum ColorTarget
+        {
+            Fill,
+            Stroke
+        }
 
+        private ColorTarget currentTarget = ColorTarget.Fill;
+        public Brush SelectedFillBrush { get; private set; } = Brushes.Transparent;
+        public Brush SelectedStrokeBrush { get; private set; } = Brushes.Black;
+        public Pen SelectedPen { get; private set; } = new Pen() {Thickness = 1, Brush = Brushes.Black };
 
-
-        private static readonly string[] ShapeNames = new string[] {"Прямоугольник", "Линия", "Ломанная", "Полигон", "Эллипс" };
 
         public MainWindow()
         {
@@ -39,6 +51,23 @@ namespace PaintKiller
             InitializeComponent();
             settingsIntialize();
             Painter painter = new Painter();
+            UndoRedo undoredo = new UndoRedo();
+        }
+        private void Mode_Checked(object sender, RoutedEventArgs e)
+        {
+            var rb = sender as RadioButton;
+            if (rb?.Tag?.ToString() == "Fill") {
+                currentTarget = ColorTarget.Fill;
+                selectedFillButton.IsChecked = true;
+                SetChecksToggleButtons(selectedFillButton);
+            }
+                
+            else if (rb?.Tag?.ToString() == "Stroke")
+            {
+                currentTarget = ColorTarget.Stroke;
+                selectedStrokeButton.IsChecked = true;
+                SetChecksToggleButtons(selectedStrokeButton);
+            }
         }
 
 
@@ -47,29 +76,8 @@ namespace PaintKiller
 
             _StartPoint = e.GetPosition(myCanvas);
             _IsDrawing = true;
-
-
-            //прямоугольник
-            _currentShape = new MyRectangle(myCanvas, _StartPoint.X, _StartPoint.Y, _StartPoint.X , _StartPoint.Y);
-
-
-            //линия
-            //_currentShape = new MyLine(myCanvas, _StartPoint.X, _StartPoint.Y, _StartPoint.X, _StartPoint.Y);
-
-
-            //Эллипс
-            //_currentShape = new MyEllipse(myCanvas, _StartPoint.X, _StartPoint.Y);
-
-
-            //ломанная
-            //_currentShape = new MyPolyline(myCanvas, _StartPoint.X, _StartPoint.Y, _StartPoint.X, _StartPoint.Y);
-
-
-            //полигон
-            _currentShape = new MyPolygon(myCanvas, _StartPoint.X, _StartPoint.Y, _StartPoint.X, _StartPoint.Y);
-
-
-            //работает вроде со всеми классами.
+            string shapeName = ShapesCBox.SelectedItem as string;
+            _currentShape = (BaseShape)Activator.CreateInstance(shapeTypes[shapeName], myCanvas, _StartPoint.X, _StartPoint.Y, SelectedPen, SelectedFillBrush);
             Painter.PaintCanvas(myCanvas, _currentShape);
 
         }
@@ -96,27 +104,71 @@ namespace PaintKiller
 
         private void settingsIntialize()
         {
-            for (int i = 0; i < ShapeNames.Length; i++)
-            {
-                ShapesCBox.Items.Add(ShapeNames[i]);
-            }
+
+            //Инициализация параметров цвета
+            SelectedFillBrush = Brushes.Transparent;
+            SelectedStrokeBrush = Brushes.Black;
+            SelectedPen = new Pen() { Brush = SelectedStrokeBrush, Thickness = 3 };
+            
+            //Кнопки начального цвета
+            selectedFillButton = WhiteTBtn;
+            selectedStrokeButton = BlackTBtn;
+
+            //Поиск всех типов фигур
+            addShapeTypes();
+            ShapesCBox.ItemsSource = shapeTypes.Keys;
+
         }
+
+
+        private void addShapeTypes()
+        {
+            shapeTypes = ShapeLoader.GetShapeTypes();
+        }
+
+
 
         private void ColorToggleButton_Click(object sender, RoutedEventArgs e)
         {
             //ColorButtonsPanel
             var clicked = sender as ToggleButton;
-            foreach (var PanelObj in GridColorButtons.Children)
+            SetChecksToggleButtons(clicked);
+            string colorName = clicked.Tag as string;
+            var CurrBrush = (Brush)new BrushConverter().ConvertFromString(colorName);
+            if (currentTarget == ColorTarget.Fill)
+            {
+                SelectedFillBrush = CurrBrush;
+                selectedFillButton = clicked;
+            }
+
+            else
+            {
+                SelectedStrokeBrush = CurrBrush;
+                SelectedPen.Brush = CurrBrush;
+                selectedStrokeButton = clicked;
+            }
+        }
+
+        private void SetChecksToggleButtons( ToggleButton isCheckedBtn)
+        {
+            foreach (var PanelObj in FillGridColorButtons.Children)
             {
                 if (PanelObj is ToggleButton)
                 {
                     ToggleButton ButtonColor = PanelObj as ToggleButton;
-                    if ( ButtonColor != clicked)
+                    if (ButtonColor != isCheckedBtn)
                     {
                         ButtonColor.IsChecked = false;
                     }
                 }
             }
+
+        }
+
+        //Тут будет происходить выбор фигуры через CBox
+        private void ShapesCBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 

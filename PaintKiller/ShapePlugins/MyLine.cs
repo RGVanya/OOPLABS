@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using PaintKiller.AttributeModule;
 
 namespace PaintKiller.ShapePlugins
 {
+    [ShapeName("Линия")]
     public class MyLine : BaseShape
     {
 
@@ -18,17 +20,17 @@ namespace PaintKiller.ShapePlugins
         protected double yEnd;
         System.Windows.Shapes.Line line = new System.Windows.Shapes.Line();
 
-        public MyLine(Canvas canvas, double x1, double y1, double x2, double y2, Pen pen = null, Brush brush = null) : base(canvas, pen, brush)
+        public MyLine(Canvas canvas, double x1, double y1, Pen pen = null, Brush brush = null) : base(canvas, pen, brush)
         {
             this.xStart = x1;
             this.yStart = y1;
-            this.xEnd = x2;
-            this.yEnd = y2;
+            this.xEnd = x1;
+            this.yEnd = y1;
 
             line.X1 = x1;
             line.Y1 = y1;
-            line.X2 = x2;
-            line.Y2 = y2;
+            line.X2 = x1;
+            line.Y2 = y1;
             line.Stroke = this.pen.Brush;
             line.Fill = this.brush;
         }
