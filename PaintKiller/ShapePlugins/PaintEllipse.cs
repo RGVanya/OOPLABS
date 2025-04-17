@@ -12,7 +12,7 @@ using PaintKiller.AttributeModule;
 namespace PaintKiller.ShapePlugins
 {
     [ShapeName("Эллипс")]
-    public class MyEllipse : BaseShape
+    public class PaintEllipse : BaseShape
     {
 
         System.Windows.Shapes.Ellipse ellipse = new System.Windows.Shapes.Ellipse();
@@ -20,10 +20,11 @@ namespace PaintKiller.ShapePlugins
         private double yStart;
         private double width;
         private double height;
-        public MyEllipse(Canvas canvas, double x1, double y1, Pen pen = null, Brush brush = null) : base(canvas, pen, brush) 
+        public PaintEllipse(Canvas canvas, double x1, double y1, Pen pen = null, Brush brush = null) : base(canvas, pen, brush) 
         {
             ellipse.Stroke = this.pen.Brush;
             ellipse.Fill = this.brush;
+            ellipse.StrokeThickness = this.pen.Thickness;
             xStart = x1;
             yStart = y1;    
             width = 0;

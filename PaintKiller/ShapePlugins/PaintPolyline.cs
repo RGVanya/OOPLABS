@@ -12,11 +12,11 @@ using PaintKiller.AttributeModule;
 namespace PaintKiller.ShapePlugins
 {
     [ShapeName("Ломанная")]
-    public class MyPolyline : MyLine
+    public class PaintPolyline : PaintLine
     {
         private Polyline polyline = new Polyline();
 
-        public MyPolyline(Canvas canvas, double x1, double y1, Pen pen = null, Brush brush = null) : base(canvas, x1, y1, pen, brush)
+        public PaintPolyline(Canvas canvas, double x1, double y1, Pen pen = null, Brush brush = null) : base(canvas, x1, y1, pen, brush)
         {
             xStart = x1;
             yStart = y1;

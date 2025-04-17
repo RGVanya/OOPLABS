@@ -12,11 +12,11 @@ using PaintKiller.AttributeModule;
 namespace PaintKiller.ShapePlugins
 {
     [ShapeName("Полигон")]
-    public class MyPolygon : MyLine
+    public class PaintPolygon : PaintLine
     {
         private Polygon polygon = new Polygon();
 
-        public MyPolygon(Canvas canvas, double x1, double y1, Pen pen = null, Brush brush = null) : base(canvas, x1, y1, pen, brush)
+        public PaintPolygon(Canvas canvas, double x1, double y1, Pen pen = null, Brush brush = null) : base(canvas, x1, y1, pen, brush)
         {
             xStart = x1;
             yStart = y1;

@@ -13,7 +13,7 @@ using PaintKiller.AttributeModule;
 namespace PaintKiller.ShapePlugins
 {
     [ShapeName("Прямоугольник")]
-    public class MyRectangle : BaseShape
+    public class Rectangle : BaseShape
     {
 
         protected double xStart;
@@ -24,12 +24,13 @@ namespace PaintKiller.ShapePlugins
         System.Windows.Shapes.Rectangle rect = new System.Windows.Shapes.Rectangle();
 
 
-        public MyRectangle(Canvas canvas, double x1, double y1, Pen pen = null, Brush brush = null) : base(canvas, pen, brush)
+        public Rectangle(Canvas canvas, double x1, double y1, Pen pen = null, Brush brush = null) : base(canvas, pen, brush)
         {
             PositionSet(x1, x1, y1, y1);
             rect.Width = this.width;
             rect.Height = this.height;
             rect.Stroke = this.pen.Brush;
+            rect.StrokeThickness = this.pen.Thickness;
             rect.Fill = this.brush;
             xStart = x1;
             yStart = y1;

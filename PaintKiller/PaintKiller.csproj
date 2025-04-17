@@ -60,11 +60,11 @@
     <Compile Include="PaintingModule\Painter.cs" />
     <Compile Include="ShapeLoadModule\ShapeLoader.cs" />
     <Compile Include="ShapePlugins\BaseShape.cs" />
-    <Compile Include="ShapePlugins\MyEllipse.cs" />
-    <Compile Include="ShapePlugins\MyLine.cs" />
-    <Compile Include="ShapePlugins\MyPolygon.cs" />
-    <Compile Include="ShapePlugins\MyPolyline.cs" />
-    <Compile Include="ShapePlugins\MyRectangle.cs" />
+    <Compile Include="ShapePlugins\PaintEllipse.cs" />
+    <Compile Include="ShapePlugins\PaintLine.cs" />
+    <Compile Include="ShapePlugins\PaintPolygon.cs" />
+    <Compile Include="ShapePlugins\PaintPolyline.cs" />
+    <Compile Include="ShapePlugins\PaintRectangle.cs" />
     <Compile Include="UndoRedoModule\UndoRedo.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

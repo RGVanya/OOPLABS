@@ -108,7 +108,7 @@ namespace PaintKiller
             //Инициализация параметров цвета
             SelectedFillBrush = Brushes.Transparent;
             SelectedStrokeBrush = Brushes.Black;
-            SelectedPen = new Pen() { Brush = SelectedStrokeBrush, Thickness = 3 };
+            SelectedPen = new Pen() { Brush = SelectedStrokeBrush, Thickness = 1 };
             
             //Кнопки начального цвета
             selectedFillButton = WhiteTBtn;
@@ -169,6 +169,11 @@ namespace PaintKiller
         private void ShapesCBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void ThicknessSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            SelectedPen.Thickness = ThicknessSlider.Value *2;
         }
     }
 

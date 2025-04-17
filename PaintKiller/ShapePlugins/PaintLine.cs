@@ -11,7 +11,7 @@ using PaintKiller.AttributeModule;
 namespace PaintKiller.ShapePlugins
 {
     [ShapeName("Линия")]
-    public class MyLine : BaseShape
+    public class PaintLine : BaseShape
     {
 
         protected double xStart;
@@ -20,7 +20,7 @@ namespace PaintKiller.ShapePlugins
         protected double yEnd;
         System.Windows.Shapes.Line line = new System.Windows.Shapes.Line();
 
-        public MyLine(Canvas canvas, double x1, double y1, Pen pen = null, Brush brush = null) : base(canvas, pen, brush)
+        public PaintLine(Canvas canvas, double x1, double y1, Pen pen = null, Brush brush = null) : base(canvas, pen, brush)
         {
             this.xStart = x1;
             this.yStart = y1;
@@ -33,6 +33,7 @@ namespace PaintKiller.ShapePlugins
             line.Y2 = y1;
             line.Stroke = this.pen.Brush;
             line.Fill = this.brush;
+            line.StrokeThickness = this.pen.Thickness;
         }
 
 
