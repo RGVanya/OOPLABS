@@ -10,13 +10,9 @@ namespace PaintKiller.ShapePlugins
 {
     public abstract class BaseShape
     {
-        //public Brush brush { get; set; } = Brushes.Transparent;
-        //public Pen pen { get; set; } = new Pen(Brushes.Black, 2.0);
-
-
-        public double penThickness { get; private set; } = 2.0;
-        public string penBrush { get; private set; } = "Black";
-        public string fillBrush { get; private set; } = "Transparent";
+        public double penThickness { get; set; } = 2.0;
+        public string penBrush { get; set; } = "Black";
+        public string fillBrush { get; set; } = "Transparent";
 
 
         private Canvas canvas;

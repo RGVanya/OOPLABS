@@ -15,7 +15,7 @@ namespace PaintKiller.ShapePlugins
     public class PaintPolygon : PaintLine
     {
         private Polygon polygon = new Polygon();
-        public List<Point> points { get; private set; } = new List<Point>();
+        public List<Point> points { get; set; } = new List<Point>();
 
         public PaintPolygon(Canvas canvas, double x1, double y1, Pen pen = null, Brush brush = null) : base(canvas, x1, y1, pen, brush)
         {

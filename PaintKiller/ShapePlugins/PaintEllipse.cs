@@ -16,10 +16,10 @@ namespace PaintKiller.ShapePlugins
     {
 
         System.Windows.Shapes.Ellipse ellipse = new System.Windows.Shapes.Ellipse();
-        public double xStart { get; private set; }
-        public double yStart { get; private set; }
-        public double width { get; private set; }
-        public double height { get; private set; }
+        public double xStart { get; set; }
+        public double yStart { get; set; }
+        public double width { get; set; }
+        public double height { get; set; }
         public PaintEllipse(Canvas canvas, double x1, double y1, Pen pen = null, Brush brush = null) : base(canvas, pen, brush) 
         {
 

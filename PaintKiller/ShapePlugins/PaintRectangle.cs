@@ -16,10 +16,10 @@ namespace PaintKiller.ShapePlugins
     public class Rectangle : BaseShape
     {
 
-        public double xStart { get; private set; }
-        public double yStart { get; private set; }
-        public double width { get; private set; }
-        public double height { get; private set; }
+        public double xStart { get; set; }
+        public double yStart { get; set; }
+        public double width { get; set; }
+        public double height { get; set; }
 
         System.Windows.Shapes.Rectangle rect = new System.Windows.Shapes.Rectangle();
 

@@ -150,5 +150,10 @@
   <ItemGroup>
     <Resource Include="Resourses\EmptyList.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resourses\OpenFileBtn.ico" />
+    <Resource Include="Resourses\Pluginbtn.ico" />
+    <Resource Include="Resourses\Savebtn.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

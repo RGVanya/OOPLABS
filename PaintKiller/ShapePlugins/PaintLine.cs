@@ -14,10 +14,10 @@ namespace PaintKiller.ShapePlugins
     public class PaintLine : BaseShape
     {
 
-        public double xStart { get; private set; }
-        public double yStart { get; private set; }
-        public double xEnd { get; private set; }
-        public double yEnd { get; private set; }
+        public double xStart { get; set; }
+        public double yStart { get; set; }
+        public double xEnd { get; set; }
+        public double yEnd { get; set; }
 
         System.Windows.Shapes.Line line = new System.Windows.Shapes.Line();
         public PaintLine(Canvas canvas, double x1, double y1, Pen pen = null, Brush brush = null) : base(canvas, pen, brush)

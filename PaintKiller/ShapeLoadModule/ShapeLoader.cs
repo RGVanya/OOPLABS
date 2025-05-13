@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Win32;
 using PaintKiller.AttributeModule;
 using PaintKiller.ShapePlugins;
 
@@ -30,6 +32,35 @@ namespace PaintKiller.ShapeLoadModule
             }
 
             return shapeDict;
+        }
+
+
+        public static (string, Type) AddNewShapeType()
+        {
+            string attr = String.Empty;
+            Type type = null;
+            OpenFileDialog FileDialog = new OpenFileDialog
+            {
+                Title = "Выберете плагин",
+                Filter = "plugins (*.dll*)|*.dll*", // Фильтр форматов
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+            };
+            if (FileDialog.ShowDialog() == true)
+            {
+                string filePath = FileDialog.FileName;
+                Assembly pluginAssembly = Assembly.LoadFrom(filePath);
+                var baseType = typeof(BaseShape);
+                var shapeType = pluginAssembly.GetTypes()
+                .Where(t => t.IsSubclassOf(baseType) && !t.IsAbstract && t.GetCustomAttribute<ShapeNameAttribute>() != null);
+                if (shapeType.Any() == true)
+                {
+                    type = shapeType.First();
+                    attr = type.GetCustomAttribute<ShapeNameAttribute>().ToString(); 
+                }
+                    
+            }
+            return (attr, type);
+
         }
 
     }

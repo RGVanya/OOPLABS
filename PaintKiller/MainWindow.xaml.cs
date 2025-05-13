@@ -115,22 +115,26 @@ namespace PaintKiller
             SelectedFillBrush = Brushes.Transparent;
             SelectedStrokeBrush = Brushes.Black;
             SelectedPen = new Pen() { Brush = SelectedStrokeBrush, Thickness = 1 };
-            
+
             //Кнопки начального цвета
             selectedFillButton = WhiteTBtn;
+            selectedFillButton.IsChecked = true;
             selectedStrokeButton = BlackTBtn;
 
+
             //Поиск всех типов фигур
-            addShapeTypes();
+            InitShapeTypes();
             ShapesCBox.ItemsSource = shapeTypes.Keys;
 
         }
 
 
-        private void addShapeTypes()
+        private void InitShapeTypes()
         {
             shapeTypes = ShapeLoader.GetShapeTypes();
         }
+
+
 
 
 
@@ -171,12 +175,6 @@ namespace PaintKiller
 
         }
 
-        //Тут будет происходить выбор фигуры через CBox
-        private void ShapesCBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
         private void ThicknessSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             SelectedPen.Thickness = ThicknessSlider.Value;
@@ -194,15 +192,44 @@ namespace PaintKiller
 
         private void NewListButton_click(object sender, RoutedEventArgs e)
         {
-            //undoredo.Reset();
-            //Painter.CanvasRepaint(myCanvas, undoredo.GetPaintedShapeList());
+            MakeNewList();
+        }
 
-            //FileManager.SaveUserFile(undoredo.GetPaintedShapeList());
-            //foreach (BaseShape shape in FileManager.OpenUserFile())
-            //{
-            //    shape.init();
-            //    shape.Draw(myCanvas);
-            //}
+        private void MakeNewList()
+        {
+            undoredo.Reset();
+            Painter.CanvasRepaint(myCanvas, undoredo.GetPaintedShapeList());
+            
+        }
+
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            FileManager.SaveUserFile(undoredo.GetPaintedShapeList());
+            MessageBox.Show("Ваш файл сохранён");
+        }
+
+        private void OpenFileButton_Click(object sender, RoutedEventArgs e)
+        {
+            MakeNewList();
+
+            foreach (BaseShape shape in FileManager.OpenUserFile())
+            {
+                shape.init();
+                shape.Draw(myCanvas);
+            }
+        }
+
+        private void AddPluginButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddShapeTypes();
+        }
+
+        private void AddShapeTypes()
+        {
+            var NewEll = ShapeLoader.AddNewShapeType();
+            shapeTypes.Add(NewEll.Item1, NewEll.Item2);
+            ShapesCBox.ItemsSource = shapeTypes.Keys;
         }
     }
 
