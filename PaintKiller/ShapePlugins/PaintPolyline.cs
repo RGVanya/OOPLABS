@@ -15,18 +15,22 @@ namespace PaintKiller.ShapePlugins
     public class PaintPolyline : PaintLine
     {
         private Polyline polyline = new Polyline();
+        public List<Point> points {get; private set; } = new List<Point>();
 
         public PaintPolyline(Canvas canvas, double x1, double y1, Pen pen = null, Brush brush = null) : base(canvas, x1, y1, pen, brush)
         {
-            xStart = x1;
-            yStart = y1;
-
-            polyline.Points.Add(new Point(xStart, yStart));
-            polyline.Stroke = this.pen.Brush;
-            polyline.Fill = this.brush;
-            polyline.StrokeThickness = this.pen.Thickness;
-
+            points.Add(new Point(xStart, yStart));
+            init();
         }
+
+        public override void init()
+        {
+            polyline.Stroke = getPenBrush();
+            polyline.Fill = getFillBrush();
+            polyline.StrokeThickness = penThickness;
+            polyline.Points = new PointCollection(points);
+        }
+
 
         public override void Draw(Canvas canvas) 
         { 
@@ -35,9 +39,10 @@ namespace PaintKiller.ShapePlugins
 
         public void AddNewPoint(Point pointToAdd) 
         {
-            polyline.Points.Add(pointToAdd);
+            //polyline.Points.Add(pointToAdd);
+            points.Add(pointToAdd);
+            polyline.Points = new PointCollection(points);
         }
-
     }
 }
 

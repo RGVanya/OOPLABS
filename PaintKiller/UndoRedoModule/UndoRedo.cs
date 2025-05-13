@@ -9,25 +9,36 @@ namespace PaintKiller.UndoRedoModule
 {
     public class UndoRedo
     {
-        Stack<BaseShape> PaintedShapes = new Stack<BaseShape>();
-        Stack<BaseShape> DeletedShapes = new Stack<BaseShape>();
+        private Stack<BaseShape> PaintedShapes = new Stack<BaseShape>();
+        private Stack<BaseShape> DeletedShapes = new Stack<BaseShape>();
 
         public UndoRedo() 
-        { 
-        
+        {
+            PaintedShapes = new Stack<BaseShape>();
+            DeletedShapes = new Stack<BaseShape>();
         }
 
-        public void StepBack()
+        public List<BaseShape> StepBack()
         {
-            if (PaintedShapes.Count == 0) { return; }
-            DeletedShapes.Push(PaintedShapes.Pop());
+            if (PaintedShapes.Count > 0) { 
+                DeletedShapes.Push(PaintedShapes.Pop()); 
+            }
+            
+            return GetPaintedShapeList();
         }
 
-        public void StepForward()
+        public List<BaseShape> StepForward()
         {
-            if (DeletedShapes.Count == 0 ) { return;}
+            if (DeletedShapes.Count > 0) {
+                PaintedShapes.Push(DeletedShapes.Pop());
+            }
+            return GetPaintedShapeList();
+        }
 
-            PaintedShapes.Push(DeletedShapes.Pop()); PaintedShapes.Push(DeletedShapes.Pop());
+        public void AddNewElement(BaseShape newEll)
+        {
+            PaintedShapes.Push(newEll);
+            DeletedShapes.Clear();
         }
 
         public void Reset() 
@@ -36,6 +47,10 @@ namespace PaintKiller.UndoRedoModule
             DeletedShapes.Clear();
         }
 
+        public List<BaseShape> GetPaintedShapeList()
+        {
+            return PaintedShapes.Reverse().ToList();
+        }
 
 
     }

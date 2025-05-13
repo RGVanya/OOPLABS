@@ -14,26 +14,31 @@ namespace PaintKiller.ShapePlugins
     public class PaintLine : BaseShape
     {
 
-        protected double xStart;
-        protected double yStart;
-        protected double xEnd;
-        protected double yEnd;
-        System.Windows.Shapes.Line line = new System.Windows.Shapes.Line();
+        public double xStart { get; private set; }
+        public double yStart { get; private set; }
+        public double xEnd { get; private set; }
+        public double yEnd { get; private set; }
 
+        System.Windows.Shapes.Line line = new System.Windows.Shapes.Line();
         public PaintLine(Canvas canvas, double x1, double y1, Pen pen = null, Brush brush = null) : base(canvas, pen, brush)
         {
             this.xStart = x1;
             this.yStart = y1;
             this.xEnd = x1;
             this.yEnd = y1;
+            init();
+        }
 
-            line.X1 = x1;
-            line.Y1 = y1;
-            line.X2 = x1;
-            line.Y2 = y1;
-            line.Stroke = this.pen.Brush;
-            line.Fill = this.brush;
-            line.StrokeThickness = this.pen.Thickness;
+
+        public override void init()
+        {
+            line.X1 = xStart;
+            line.Y1 = yStart;
+            line.X2 = xEnd;
+            line.Y2 = yEnd;
+            line.Stroke = getPenBrush();
+            line.Fill = getFillBrush();
+            line.StrokeThickness = penThickness;
         }
 
 

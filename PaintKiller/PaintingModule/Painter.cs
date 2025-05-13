@@ -7,19 +7,22 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using PaintKiller.ShapePlugins;
+using PaintKiller.UndoRedoModule;
 
 namespace PaintKiller.PaintingModule
 {
-    internal class Painter
+    public class Painter
     {
+        
 
 
-        private BaseShape _currentShape;
-        public Painter() { }
+        Painter() 
+        { 
+            
+        }
 
         public static void PaintCanvas(Canvas canvas, BaseShape ShapeToPaint)
         {
-
 
             ShapeToPaint.Draw(canvas);
         }
@@ -47,6 +50,15 @@ namespace PaintKiller.PaintingModule
             else
             {
                 return;
+            }
+        }
+
+        public static void CanvasRepaint(Canvas canvas, List<BaseShape> shapes)
+        {
+            canvas.Children.Clear();
+            foreach (BaseShape shape in shapes) 
+            {
+                shape.Draw(canvas);
             }
         }
 

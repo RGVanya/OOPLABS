@@ -15,19 +15,22 @@ namespace PaintKiller.ShapePlugins
     public class PaintPolygon : PaintLine
     {
         private Polygon polygon = new Polygon();
+        public List<Point> points { get; private set; } = new List<Point>();
 
         public PaintPolygon(Canvas canvas, double x1, double y1, Pen pen = null, Brush brush = null) : base(canvas, x1, y1, pen, brush)
         {
-            xStart = x1;
-            yStart = y1;
-
             polygon.Points.Add(new Point(xStart, yStart));
-            polygon.Stroke = this.pen.Brush;
-            polygon.Fill = this.brush;
-            polygon.StrokeThickness = this.pen.Thickness;
-
+            init();
         }
 
+
+        public override void init()
+        {
+            polygon.Stroke = getPenBrush();
+            polygon.Fill = getFillBrush();
+            polygon.StrokeThickness = penThickness;
+            polygon.Points = new PointCollection(points);
+        }
         public override void Draw(Canvas canvas)
         {
             canvas.Children.Add(polygon);
@@ -36,7 +39,8 @@ namespace PaintKiller.ShapePlugins
 
         public void AddNewPoint(Point pointToAdd)
         {
-            polygon.Points.Add(pointToAdd);
+            points.Add(pointToAdd); 
+            polygon.Points = new PointCollection(points);
         }
     }
 }

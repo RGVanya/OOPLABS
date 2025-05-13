@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PaintKiller.AttributeModule;
+using PaintKiller.FileModule;
 using PaintKiller.PaintingModule;
 using PaintKiller.ShapeLoadModule;
 using PaintKiller.ShapePlugins;
@@ -43,15 +44,14 @@ namespace PaintKiller
         public Brush SelectedFillBrush { get; private set; } = Brushes.Transparent;
         public Brush SelectedStrokeBrush { get; private set; } = Brushes.Black;
         public Pen SelectedPen { get; private set; } = new Pen() {Thickness = 1, Brush = Brushes.Black };
-
+        UndoRedo undoredo = new UndoRedo();
 
         public MainWindow()
         {
 
             InitializeComponent();
             settingsIntialize();
-            Painter painter = new Painter();
-            UndoRedo undoredo = new UndoRedo();
+            
         }
         private void Mode_Checked(object sender, RoutedEventArgs e)
         {
@@ -76,10 +76,15 @@ namespace PaintKiller
 
             _StartPoint = e.GetPosition(myCanvas);
             _IsDrawing = true;
+            createNewShape();
+        }
+
+        private void createNewShape()
+        {
             string shapeName = ShapesCBox.SelectedItem as string;
             _currentShape = (BaseShape)Activator.CreateInstance(shapeTypes[shapeName], myCanvas, _StartPoint.X, _StartPoint.Y, SelectedPen, SelectedFillBrush);
             Painter.PaintCanvas(myCanvas, _currentShape);
-
+            undoredo.AddNewElement(_currentShape);
         }
 
 
@@ -98,6 +103,7 @@ namespace PaintKiller
 
         private void myCanvas_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
+            if (_currentShape == null) { return; }
             Point currentPoint = e.GetPosition(myCanvas);
             Painter.AddPoint(myCanvas, _currentShape, currentPoint);
         }
@@ -173,7 +179,30 @@ namespace PaintKiller
 
         private void ThicknessSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            SelectedPen.Thickness = ThicknessSlider.Value *2;
+            SelectedPen.Thickness = ThicknessSlider.Value;
+        }
+
+        private void UndoButton_click(object sender, RoutedEventArgs e)
+        {
+            Painter.CanvasRepaint(myCanvas, undoredo.StepBack());
+        }
+
+        private void RedoButton_click(object sender, RoutedEventArgs e)
+        {
+            Painter.CanvasRepaint(myCanvas, undoredo.StepForward());
+        }
+
+        private void NewListButton_click(object sender, RoutedEventArgs e)
+        {
+            //undoredo.Reset();
+            //Painter.CanvasRepaint(myCanvas, undoredo.GetPaintedShapeList());
+
+            //FileManager.SaveUserFile(undoredo.GetPaintedShapeList());
+            //foreach (BaseShape shape in FileManager.OpenUserFile())
+            //{
+            //    shape.init();
+            //    shape.Draw(myCanvas);
+            //}
         }
     }
 

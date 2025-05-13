@@ -16,10 +16,10 @@ namespace PaintKiller.ShapePlugins
     public class Rectangle : BaseShape
     {
 
-        protected double xStart;
-        protected double yStart;
-        protected double width;
-        protected double height;
+        public double xStart { get; private set; }
+        public double yStart { get; private set; }
+        public double width { get; private set; }
+        public double height { get; private set; }
 
         System.Windows.Shapes.Rectangle rect = new System.Windows.Shapes.Rectangle();
 
@@ -27,13 +27,18 @@ namespace PaintKiller.ShapePlugins
         public Rectangle(Canvas canvas, double x1, double y1, Pen pen = null, Brush brush = null) : base(canvas, pen, brush)
         {
             PositionSet(x1, x1, y1, y1);
-            rect.Width = this.width;
-            rect.Height = this.height;
-            rect.Stroke = this.pen.Brush;
-            rect.StrokeThickness = this.pen.Thickness;
-            rect.Fill = this.brush;
             xStart = x1;
             yStart = y1;
+            init();
+        }
+
+        public override void init()
+        {
+            rect.Width = this.width;
+            rect.Height = this.height;
+            rect.Stroke = getPenBrush();
+            rect.StrokeThickness = penThickness;
+            rect.Fill = getFillBrush();
         }
 
 
@@ -82,6 +87,14 @@ namespace PaintKiller.ShapePlugins
             width = Math.Abs(y1 - y2);
 
 
+        }
+
+
+
+        public class RectangleDTO
+        {
+            public double X, Y, Width, Height;
+            public string Fill;
         }
 
     }
