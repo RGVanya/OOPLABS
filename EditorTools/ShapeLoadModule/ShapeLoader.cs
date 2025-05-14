@@ -42,7 +42,7 @@ namespace EditorTools.ShapeLoadModule
             OpenFileDialog FileDialog = new OpenFileDialog
             {
                 Title = "Выберете плагин",
-                Filter = "plugins (*.dll*)|*.dll*", // Фильтр форматов
+                Filter = "plugins (*.dll*)|*.dll*", 
                 InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
             };
             if (FileDialog.ShowDialog() == true)
@@ -56,7 +56,6 @@ namespace EditorTools.ShapeLoadModule
                 {
                     type = shapeType.First();
                     attr = type.GetCustomAttribute<ShapeNameAttribute>().DisplayName;
-                    //FileManager.LoadPluginFile(FileDialog.FileName);
                 }
 
             }

@@ -10,20 +10,21 @@ namespace EditorTools.UndoRedoModule
 {
     public class UndoRedo
     {
-        private Stack<BaseShape> PaintedShapes = new Stack<BaseShape>();
+        private List<BaseShape> PaintedShapes = new List<BaseShape>();
         private Stack<BaseShape> DeletedShapes = new Stack<BaseShape>();
 
         public UndoRedo()
         {
-            PaintedShapes = new Stack<BaseShape>();
+            PaintedShapes = new List<BaseShape>();
             DeletedShapes = new Stack<BaseShape>();
         }
 
         public List<BaseShape> StepBack()
         {
             if (PaintedShapes.Count > 0)
-            {
-                DeletedShapes.Push(PaintedShapes.Pop());
+            { 
+                DeletedShapes.Push(PaintedShapes[PaintedShapes.Count - 1]);
+                PaintedShapes.RemoveAt(PaintedShapes.Count - 1);
             }
 
             return GetPaintedShapeList();
@@ -33,14 +34,14 @@ namespace EditorTools.UndoRedoModule
         {
             if (DeletedShapes.Count > 0)
             {
-                PaintedShapes.Push(DeletedShapes.Pop());
+                PaintedShapes.Add(DeletedShapes.Pop());
             }
             return GetPaintedShapeList();
         }
 
         public void AddNewElement(BaseShape newEll)
         {
-            PaintedShapes.Push(newEll);
+            PaintedShapes.Add(newEll);
             DeletedShapes.Clear();
         }
 
@@ -52,7 +53,7 @@ namespace EditorTools.UndoRedoModule
 
         public List<BaseShape> GetPaintedShapeList()
         {
-            return PaintedShapes.Reverse().ToList();
+            return PaintedShapes;
         }
 
 
