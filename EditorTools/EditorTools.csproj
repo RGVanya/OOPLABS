@@ -56,6 +56,7 @@
     <Compile Include="Shapes\PaintPolygon.cs" />
     <Compile Include="Shapes\PaintPolyline.cs" />
     <Compile Include="Shapes\PaintRectangle.cs" />
+    <Compile Include="Shapes\Pentagon.cs" />
     <Compile Include="UndoRedoModule\UndoRedo.cs" />
   </ItemGroup>
   <ItemGroup>

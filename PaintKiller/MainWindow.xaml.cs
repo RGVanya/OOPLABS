@@ -207,7 +207,7 @@ namespace PaintKiller
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             FileManager.SaveUserFile(undoredo.GetPaintedShapeList());
-            MessageBox.Show("Ваш файл сохранён");
+            //MessageBox.Show("Ваш файл сохранён");
         }
 
         private void OpenFileButton_Click(object sender, RoutedEventArgs e)
@@ -218,6 +218,7 @@ namespace PaintKiller
             {
                 shape.init();
                 shape.Draw(myCanvas);
+                undoredo.AddNewElement(shape);
             }
         }
 
