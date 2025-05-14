@@ -15,12 +15,13 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using PaintKiller.AttributeModule;
-using PaintKiller.FileModule;
-using PaintKiller.PaintingModule;
-using PaintKiller.ShapeLoadModule;
-using PaintKiller.ShapePlugins;
-using PaintKiller.UndoRedoModule;
+using AttributeModule;
+using EditorTools.ShapeLoadModule;
+using EditorTools.Shapes;
+using BaseShapeModule;
+using EditorTools.UndoRedoModule;
+using EditorTools.PaintingModule;
+using EditorTools.FileModule;
 
 
 namespace PaintKiller

@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
+using AttributeModule;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Media.Media3D;
-using System.Windows.Shapes;
-using PaintKiller.AttributeModule;
+using BaseShapeModule;
 
-namespace PaintKiller.ShapePlugins
+namespace EditorTools.Shapes
 {
     [ShapeName("Прямоугольник")]
     public class Rectangle : BaseShape
@@ -42,10 +40,11 @@ namespace PaintKiller.ShapePlugins
         }
 
 
-        public override void Draw(Canvas canvas) {
+        public override void Draw(Canvas canvas)
+        {
             canvas.Children.Add(rect);
-            Canvas.SetLeft(rect, xStart); 
-            Canvas.SetTop(rect, yStart);  
+            Canvas.SetLeft(rect, xStart);
+            Canvas.SetTop(rect, yStart);
         }
 
         public override void UpdateShape(Canvas canvas, double new_x, double new_y)
@@ -55,7 +54,7 @@ namespace PaintKiller.ShapePlugins
 
 
             rect.Width = width;
-            rect.Height = height;      
+            rect.Height = height;
 
             if (xStart > new_x)
                 Canvas.SetLeft(rect, new_x);

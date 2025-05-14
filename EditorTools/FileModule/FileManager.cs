@@ -3,17 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
+using BaseShapeModule;
 using Microsoft.Win32;
-using PaintKiller.ShapePlugins;
 using Newtonsoft.Json;
-using System.Windows.Shapes;
-using System.Runtime.Remoting.Contexts;
 
-namespace PaintKiller.FileModule
+namespace EditorTools.FileModule
 {
-    static class FileManager
+    static public class FileManager
     {
 
 
@@ -24,7 +21,7 @@ namespace PaintKiller.FileModule
             {
                 Title = "Открытие файла",
                 Filter = "Все файлы (*.*)|*.*",
-                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) 
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
             };
             JsonSerializerSettings settings = new JsonSerializerSettings
             {
@@ -41,7 +38,7 @@ namespace PaintKiller.FileModule
             return shapes;
         }
 
-        public static void SaveUserFile(List<BaseShape> shapes) 
+        public static void SaveUserFile(List<BaseShape> shapes)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog
             {
@@ -50,7 +47,7 @@ namespace PaintKiller.FileModule
                 InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) // Открыть "Документы"
             };
             if (saveFileDialog.ShowDialog() == true)
-            {               
+            {
                 JsonSerializerSettings settings = new JsonSerializerSettings
                 {
                     TypeNameHandling = TypeNameHandling.All,
@@ -62,7 +59,11 @@ namespace PaintKiller.FileModule
         }
 
 
-
+        public static void LoadPluginFile(string PluginPath)
+        {
+            string exePath = AppDomain.CurrentDomain.BaseDirectory;
+            File.Copy(PluginPath, exePath + Path.GetFileName(PluginPath));
+        }
 
 
     }

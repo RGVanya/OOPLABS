@@ -4,21 +4,20 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
+using BaseShapeModule;
 using System.Windows.Controls;
-using PaintKiller.ShapePlugins;
-using PaintKiller.UndoRedoModule;
+using System.Windows;
 
-namespace PaintKiller.PaintingModule
+namespace EditorTools.PaintingModule
 {
     public class Painter
     {
-        
 
 
-        Painter() 
-        { 
-            
+
+        Painter()
+        {
+
         }
 
         public static void PaintCanvas(Canvas canvas, BaseShape ShapeToPaint)
@@ -44,7 +43,7 @@ namespace PaintKiller.PaintingModule
             MethodInfo method = type.GetMethod("AddNewPoint");
             if (method != null)
             {
-                
+
                 method.Invoke(shape, new object[] { currentPoint });
             }
             else
@@ -56,7 +55,7 @@ namespace PaintKiller.PaintingModule
         public static void CanvasRepaint(Canvas canvas, List<BaseShape> shapes)
         {
             canvas.Children.Clear();
-            foreach (BaseShape shape in shapes) 
+            foreach (BaseShape shape in shapes)
             {
                 shape.Draw(canvas);
             }

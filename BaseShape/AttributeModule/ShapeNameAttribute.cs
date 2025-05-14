@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PaintKiller.AttributeModule
+namespace AttributeModule
 {
     public class ShapeNameAttribute : Attribute
     {
         public string DisplayName { get; }
-        public ShapeNameAttribute(string name) 
+        public ShapeNameAttribute(string name)
         {
             DisplayName = name;
         }

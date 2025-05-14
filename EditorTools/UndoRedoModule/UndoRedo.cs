@@ -3,16 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using PaintKiller.ShapePlugins;
+using EditorTools.Shapes;
+using BaseShapeModule;
 
-namespace PaintKiller.UndoRedoModule
+namespace EditorTools.UndoRedoModule
 {
     public class UndoRedo
     {
         private Stack<BaseShape> PaintedShapes = new Stack<BaseShape>();
         private Stack<BaseShape> DeletedShapes = new Stack<BaseShape>();
 
-        public UndoRedo() 
+        public UndoRedo()
         {
             PaintedShapes = new Stack<BaseShape>();
             DeletedShapes = new Stack<BaseShape>();
@@ -20,16 +21,18 @@ namespace PaintKiller.UndoRedoModule
 
         public List<BaseShape> StepBack()
         {
-            if (PaintedShapes.Count > 0) { 
-                DeletedShapes.Push(PaintedShapes.Pop()); 
+            if (PaintedShapes.Count > 0)
+            {
+                DeletedShapes.Push(PaintedShapes.Pop());
             }
-            
+
             return GetPaintedShapeList();
         }
 
         public List<BaseShape> StepForward()
         {
-            if (DeletedShapes.Count > 0) {
+            if (DeletedShapes.Count > 0)
+            {
                 PaintedShapes.Push(DeletedShapes.Pop());
             }
             return GetPaintedShapeList();
@@ -41,7 +44,7 @@ namespace PaintKiller.UndoRedoModule
             DeletedShapes.Clear();
         }
 
-        public void Reset() 
+        public void Reset()
         {
             PaintedShapes.Clear();
             DeletedShapes.Clear();

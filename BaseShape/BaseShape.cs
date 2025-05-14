@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace PaintKiller.ShapePlugins
+namespace BaseShapeModule
 {
     public abstract class BaseShape
     {
@@ -16,14 +16,14 @@ namespace PaintKiller.ShapePlugins
 
 
         private Canvas canvas;
-       
+
 
 
         public BaseShape(Canvas canvas, Pen pen_value = null, Brush brush_value = null)
         {
             this.canvas = canvas;
 
-            if (pen_value != null) 
+            if (pen_value != null)
             {
                 penThickness = pen_value.Thickness;
                 penBrush = pen_value.Brush.ToString();
@@ -41,8 +41,8 @@ namespace PaintKiller.ShapePlugins
         public virtual void UpdateShape(Canvas canvas, double new_x, double new_y)
         {
 
-        
-        
+
+
         }
 
         public abstract void init();

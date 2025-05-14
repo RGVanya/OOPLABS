@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
+using AttributeModule;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using PaintKiller.AttributeModule;
+using System.Windows;
+using BaseShapeModule;
 
-namespace PaintKiller.ShapePlugins
+namespace EditorTools.Shapes
 {
     [ShapeName("Ломанная")]
     public class PaintPolyline : PaintLine
     {
         private Polyline polyline = new Polyline();
-        public List<Point> points {get; set; } = new List<Point>();
+        public List<Point> points { get; set; } = new List<Point>();
 
         public PaintPolyline(Canvas canvas, double x1, double y1, Pen pen = null, Brush brush = null) : base(canvas, x1, y1, pen, brush)
         {
@@ -33,12 +34,12 @@ namespace PaintKiller.ShapePlugins
         }
 
 
-        public override void Draw(Canvas canvas) 
-        { 
+        public override void Draw(Canvas canvas)
+        {
             canvas.Children.Add(polyline);
         }
 
-        public void AddNewPoint(Point pointToAdd) 
+        public void AddNewPoint(Point pointToAdd)
         {
             //polyline.Points.Add(pointToAdd);
             points.Add(pointToAdd);
@@ -46,4 +47,3 @@ namespace PaintKiller.ShapePlugins
         }
     }
 }
-

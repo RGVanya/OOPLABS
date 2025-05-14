@@ -89,17 +89,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AttributeModule\ShapeNameAttribute.cs" />
-    <Compile Include="FileModule\FileManager.cs" />
-    <Compile Include="PaintingModule\Painter.cs" />
-    <Compile Include="ShapeLoadModule\ShapeLoader.cs" />
-    <Compile Include="ShapePlugins\BaseShape.cs" />
-    <Compile Include="ShapePlugins\PaintEllipse.cs" />
-    <Compile Include="ShapePlugins\PaintLine.cs" />
-    <Compile Include="ShapePlugins\PaintPolygon.cs" />
-    <Compile Include="ShapePlugins\PaintPolyline.cs" />
-    <Compile Include="ShapePlugins\PaintRectangle.cs" />
-    <Compile Include="UndoRedoModule\UndoRedo.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -154,6 +143,16 @@
     <Resource Include="Resourses\OpenFileBtn.ico" />
     <Resource Include="Resourses\Pluginbtn.ico" />
     <Resource Include="Resourses\Savebtn.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BaseShape\BaseShapeModule.csproj">
+      <Project>{6daba152-8827-4352-a2f4-e2b4c4944608}</Project>
+      <Name>BaseShapeModule</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EditorTools\EditorTools.csproj">
+      <Project>{857f56eb-61dd-407b-98c4-5af20cd04cf9}</Project>
+      <Name>EditorTools</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

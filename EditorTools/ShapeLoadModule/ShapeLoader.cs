@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Win32;
-using PaintKiller.AttributeModule;
-using PaintKiller.ShapePlugins;
+using BaseShapeModule;
+using AttributeModule;
+using EditorTools.FileModule;
 
-namespace PaintKiller.ShapeLoadModule
+namespace EditorTools.ShapeLoadModule
 {
     public static class ShapeLoader
     {
@@ -22,7 +22,7 @@ namespace PaintKiller.ShapeLoadModule
                            .GetTypes()
                            .Where(t => t.IsSubclassOf(baseType) && !t.IsAbstract && t.GetCustomAttribute<ShapeNameAttribute>() != null)
                            .ToList();
-            foreach(var type in types)
+            foreach (var type in types)
             {
                 var attr = type.GetCustomAttribute<ShapeNameAttribute>();
                 if (attr != null)
@@ -55,9 +55,10 @@ namespace PaintKiller.ShapeLoadModule
                 if (shapeType.Any() == true)
                 {
                     type = shapeType.First();
-                    attr = type.GetCustomAttribute<ShapeNameAttribute>().ToString(); 
+                    attr = type.GetCustomAttribute<ShapeNameAttribute>().DisplayName;
+                    //FileManager.LoadPluginFile(FileDialog.FileName);
                 }
-                    
+
             }
             return (attr, type);
 

@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
+using AttributeModule;
+using BaseShapeModule;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Shapes;
-using PaintKiller.AttributeModule;
 
-namespace PaintKiller.ShapePlugins
+namespace EditorTools.Shapes
 {
     [ShapeName("Эллипс")]
     public class PaintEllipse : BaseShape
@@ -20,11 +19,11 @@ namespace PaintKiller.ShapePlugins
         public double yStart { get; set; }
         public double width { get; set; }
         public double height { get; set; }
-        public PaintEllipse(Canvas canvas, double x1, double y1, Pen pen = null, Brush brush = null) : base(canvas, pen, brush) 
+        public PaintEllipse(Canvas canvas, double x1, double y1, Pen pen = null, Brush brush = null) : base(canvas, pen, brush)
         {
 
             xStart = x1;
-            yStart = y1;    
+            yStart = y1;
             width = 0;
             height = 0;
             init();

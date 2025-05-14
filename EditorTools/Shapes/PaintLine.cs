@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
+using AttributeModule;
 using System.Windows.Controls;
 using System.Windows.Media;
-using PaintKiller.AttributeModule;
+using BaseShapeModule;
 
-namespace PaintKiller.ShapePlugins
+namespace EditorTools.Shapes
 {
     [ShapeName("Линия")]
     public class PaintLine : BaseShape

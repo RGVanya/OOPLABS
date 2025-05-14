@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AttributeModule;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows;
-using PaintKiller.AttributeModule;
+using BaseShapeModule;
 
-namespace PaintKiller.ShapePlugins
+namespace EditorTools.Shapes
 {
     [ShapeName("Полигон")]
     public class PaintPolygon : PaintLine
@@ -39,7 +40,7 @@ namespace PaintKiller.ShapePlugins
 
         public void AddNewPoint(Point pointToAdd)
         {
-            points.Add(pointToAdd); 
+            points.Add(pointToAdd);
             polygon.Points = new PointCollection(points);
         }
     }
